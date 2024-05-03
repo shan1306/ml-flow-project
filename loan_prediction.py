@@ -13,6 +13,9 @@ import os
 import warnings
 warnings.filterwarnings("ignore")
 
+mlflow.set_tracking_uri("http://127.0.0.1:5001/")
+
+
 # Load the dataset
 dataset = pd.read_csv("train.csv")
 numerical_cols = dataset.select_dtypes(include=['int64', 'float64']).columns.tolist()
@@ -133,6 +136,7 @@ def eval_metrics(actual, pred):
 
 def mlflow_logging(model, X, y, name):
     with mlflow.start_run() as run:
+        mlflow.set_tracking_uri("http://127.0.0.1:5001/")
         run_id = run.info.run_id
         mlflow.set_tag("run_id", run_id)
         pred = model.predict(X)
