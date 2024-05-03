@@ -10,6 +10,10 @@ from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn import metrics
 import mlflow
 import os
+import warnings
+
+with warnings.catch_warnings():
+    warnings.filterwarnings("ignore")
 
 # Load the dataset
 dataset = pd.read_csv("train.csv")
